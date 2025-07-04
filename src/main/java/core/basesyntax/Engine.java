@@ -3,8 +3,8 @@ package core.basesyntax;
 import java.util.Objects;
 
 public class Engine implements Cloneable {
-    private final int horsePower;
-    private final String manufacturer;
+    private int horsePower;
+    private String manufacturer;
 
     public Engine(int horsePower, String manufacturer) {
         this.horsePower = horsePower;
@@ -23,8 +23,16 @@ public class Engine implements Cloneable {
         return manufacturer;
     }
 
+    public void setHorsePower(int horsePower) {
+        this.horsePower = horsePower;
+    }
+
+    public void setManufacturer(String manufacturer) {
+        this.manufacturer = manufacturer;
+    }
+
     @Override
-    protected Engine clone() {
+    public Engine clone() {
         try {
             return (Engine) super.clone();
         } catch (CloneNotSupportedException e) {
@@ -50,11 +58,11 @@ public class Engine implements Cloneable {
         if (this == o) {
             return true;
         }
-        if (o == null || getClass() != o.getClass()) {
+        if (o == null || !(o instanceof Engine)) {
             return false;
         }
-        Engine current = (Engine) o;
-        return horsePower == current.horsePower
-                && Objects.equals(manufacturer, current.manufacturer);
+        Engine engine = (Engine) o;
+        return horsePower == engine.horsePower
+                && Objects.equals(manufacturer, engine.manufacturer);
     }
 }
